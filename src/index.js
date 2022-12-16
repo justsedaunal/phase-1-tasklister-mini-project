@@ -1,20 +1,27 @@
 document.addEventListener("DOMContentLoaded", () => {
   const form = document.getElementById("create-task-form");
-  form.addEventListener("submit", (event) => {
-    event.preventDefault()
-    const input = document.querySelector("input#new-task-description").value;
-    const listItem = document.createElement("li");
-    const unorderedList = document.getElementById("tasks");
-    const button = document.createElement("button");
-    button.textContent = "x"
-    listItem.textContent = `${input} `;
-    listItem.appendChild(button);
-    //console.log(listItem);
-    unorderedList.appendChild(listItem);
-    //console.log(unorderedList);
-    button.addEventListener("click", () => {
-      listItem.remove()
-    })
+  console.log(form);
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    handleAddTask(e.target.new_task.value);
     form.reset();
-  })
+  });
+  // your code here
 });
+
+function handleAddTask(todo) {
+  const li = document.createElement("li");
+  const btn = document.createElement("button");
+  const ul = document.getElementById("tasks");
+
+  li.textContent = todo;
+  btn.textContent = "✖";
+  ul.appendChild(li);
+  li.appendChild(btn);
+
+  btn.addEventListener("click", (e) => {
+    e.target.parentNode.remove();
+  });
+
+  console.log(todo);
+}
